@@ -38,7 +38,7 @@ let args = getArgs();
   let used = info.download + info.upload;
   let total = info.total;
   let expire = args.expire || info.expire;
-  let content = [`用量：${bytesToSize((used)/100)} | ${bytesToSize(total)}`];
+  let content = [`用量：${bytesToSize(used)} | ${bytesToSize(total)}`];
 
   if (resetDayLeft) {
     content.push(`重置：剩余${resetDayLeft}天`);
@@ -135,7 +135,7 @@ function bytesToSize(bytes) {
   if (bytes === 0) return "0B";
   let k = 1024;
   sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-  let i = Math.floor(Math.log(bytes) / Math.log(k));
+  let i = Math.floor(Math.log(bytes) / Math.log(k)*100 + %);
   return (bytes / Math.pow(k, i)).toFixed(2) + " " + sizes[i];
 }
 
